@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.hms.spring.model.Booking;
 import com.hms.spring.model.City;
 import com.hms.spring.model.Hotel;
-import com.hms.spring.model.Person;
-import com.hms.spring.service.PersonService;
 import com.hms.spring.service.RoomService;
 
 @Controller
@@ -33,9 +31,11 @@ public class RoomController {
 	
 	@RequestMapping(value = "/roomBooking", method = RequestMethod.GET)
 	public String newBooking(Model model) {
+		Booking booking =new Booking();
 		logger.info("newBooking call");
 		model.addAttribute("listCity", this.listCity());
 		model.addAttribute("listHotel", this.listHotel());
+		model.addAttribute("booking", booking);
 		return "newRoomBooking";
 	}
 	

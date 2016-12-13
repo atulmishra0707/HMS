@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hms.spring.model.Booking;
 import com.hms.spring.model.City;
@@ -49,11 +48,12 @@ public class RoomDaoImpl implements RoomDao {
 	public int addBooking(Booking b) {
 		try{
 		Session session = this.sessionFactory.getCurrentSession();
-		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+		/*SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
 		Date chkIn = ft.parse(b.getCheckInDate());
 		Date chkOut = ft.parse(b.getCheckOutDate());
 		b.setCheckInDate(chkIn.toString());
-		b.setCheckOutDate(chkOut.toString());
+		b.setCheckOutDate(chkOut.toString());*/
+		b.setModifyBy("HMSSystem");
 		b.setModifyOn(new Date());
 		
 		session.persist(b);

@@ -65,60 +65,75 @@ body {
 	margin-top: 10%;
 	text-align: left;
 }
+.table {
+	position: relative;
+	left: 30%;
+	width: 100%;
+	display: inline-block;
+	text-align: left;
+}
+.div{
+    margin: 10	;
+    padding: 0.4em;
+    text-align: center;
+  }
 </style>
 </head>
 <body class="body">
 	<h2>List of Hotel with Lowest Price</h2>
-	<div class="container">
 	<div>
-		<table>
-			<tr>
-				<td>City</td>
-				<c:if test="${!empty listCity}">
-					<td><select name="city">
-							<option value="0">---</option>
-							<c:forEach items="${listCity}" var="city">
-								<option value="${city.id}">${city.name}</option>
-							</c:forEach>
-					</select></td>
-				</c:if>
-				<c:if test="${empty listCity}">
-					<td><select name="city">
-							<option value="0">---</option>
-					</select></td>
-				</c:if>
-			</tr>
-		</table>
-	</div>
-	<div>
-		<c:if test="${!empty listHotels}">
+		<div class="container div">
+			<table>
+				<tr>
+					<td>City</td>
+					<c:if test="${!empty listCity}">
+						<td><select name="city">
+								<option value="0">---</option>
+								<c:forEach items="${listCity}" var="city">
+									<option value="${city.id}">${city.name}</option>
+								</c:forEach>
+						</select></td>
+					</c:if>
+					<c:if test="${empty listCity}">
+						<td><select name="city">
+								<option value="0">---</option>
+						</select></td>
+					</c:if>
+				</tr>
+			</table>
+		</div>
+		<div class=" table">
 			<table class="tg">
 				<tr>
-					<th width="80">Person ID</th>
-					<th width="120">Person Name</th>
-					<th width="120">Person Country</th>
+					<th width="80">Hotel</th>
+					<th width="120">Address</th>
+					<th width="120">Price(per Day)</th>
 					<th width="60">Action</th>
 				</tr>
-				<c:forEach items="${listHotels}" var="hotel">
-					<tr>
-						<td>${hotel.id}</td>
-						<td>${hotel.name}</td>
-						<td>${hotel.country}</td>
-						<td><a href="<c:url value='/book/${hotel.id}' />">Book</a></td>
-					</tr>
-				</c:forEach>
 			</table>
-		</c:if>
-	</div>
+			<c:if test="${!empty listHotels}">
+				<table class="tg">
+					<c:forEach items="${listHotels}" var="hotel">
+						<tr>
+							<td>${hotel.id}</td>
+							<td>${hotel.name}</td>
+							<td>${hotel.name}</td>
+							<td>${hotel.country}</td>
+							<td><a href="<c:url value='/book/${hotel.id}' />">Book</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
+		</div>
 
-	<div style="display: inline-block">
-		<table>
-			<tr>
-				<td colspan="2"><a href="/HMS"><input type="button"
-						value="Home" /></a></td>
-			</tr>
-		</table>
-	</div>
+		<div class="container div" style="display: inline-block">
+			<table>
+				<tr>
+					<td width="120"><a href="/HMS"><input type="button"
+							value="Cancel" /></a></td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </body>
 </html>

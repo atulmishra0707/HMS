@@ -37,9 +37,9 @@ body {
 						$("#checkindate")
 								.change(
 										function() {
-											var currentDate = new Date();
-
+											var currentDate = new Date();											
 											var selected = new Date(this.value);
+											$("#hcheckindate").val(this.value);
 											if (selected <= currentDate) {
 												this.value = "";
 												alert("Check-in date cannot be less or equal to current date");
@@ -52,6 +52,7 @@ body {
 											var selected = this.value;
 											var checkindate = $("#checkindate")
 													.val();
+											$("#hcheckoutdate").val(this.value);
 											if (selected <= checkindate) {
 												this.value = "";
 												alert("Check-out date cannot be less or equal to Check-in date");
@@ -93,36 +94,40 @@ body {
 			<tr>
 				<td>City</td>
 				<c:if test="${!empty listCity}">
-					<td><select id="city" name="city">
+					<td><form:select path="cityId" id="city" name="city">
 							<option value="0">---</option>
 							<c:forEach items="${listCity}" var="city">
 								<option value="${city.id}">${city.name}</option>
 							</c:forEach>
-					</select></td>
+					</form:select></td>
 				</c:if>
 				<c:if test="${empty listCity}">
-					<td><select name="city">
+					<td><form:select path="cityId" name="city">
 							<option value="0">---</option>
-					</select></td>
+					</form:select></td>
 				</c:if>
 			</tr>
 			<tr>
 				<td>Hotel</td>
-				<td><select id="hotel" name="hotel">
+				<td><form:select path="hotelId" id="hotel" name="hotel">
 						<option value="0">---</option>
-				</select></td>
+				</form:select></td>
 			</tr>
 			<tr>
 				<td>Check-In-Date</td>
-				<td><input type="date" id="checkindate" name="checkindate"></td>
+				<td><input type="date" id="checkindate" name="checkindate"/>
+				<form:input type="hidden" id="hcheckindate" path="checkInDate"/></td>
+				<%-- <form:input path="checkindate" type="hidden" id="checkindate" name="checkindate"/> --%>
 			</tr>
 			<tr>
 				<td>Check-Out-Date</td>
-				<td><input type="date" id="checkoutdate" name="checkoutdate"></td>
+				<td><input type="date" id="checkoutdate" name="checkoutdate"/>
+				<form:input type="hidden" id="hcheckoutdate" path="checkOutDate"/></td>
+				<%-- <form:input path="checkoutdate" type="date" id="checkoutdate" name="checkoutdate"/> --%>
 			</tr>
 			<tr>
 				<td>Number of Rooms</td>
-				<td><input type="number" id="totalrooms" name="totalrooms"
+				<td><form:input path="roomCount" type="number" id="roomCount" name="roomCount"
 					min="0" max="10" step="1" value="1" /></td>
 			</tr>
 			<tr>
