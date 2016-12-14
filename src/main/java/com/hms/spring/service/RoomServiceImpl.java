@@ -57,4 +57,14 @@ public class RoomServiceImpl implements RoomService {
 		this.roomDao.updateBooking(b);
 		
 	}
+
+	@Override
+	public City getCity(Booking b) {
+		return this.roomDao.getCity(b);
+	}
+
+	@Override
+	public Hotel getHotel(Booking b) {
+		return this.roomDao.getHotel(b);
+	}
 }

@@ -59,6 +59,8 @@ public class RoomController {
 			this.roomService.updateBooking(b);
 		}
 		model.addAttribute("bookingConfirmation", b);
+		/*model.addAttribute("city", roomService.getCity(b));
+		model.addAttribute("hotel", roomService.getHotel(b));*/
 		return "bookingConfirmation";
 	}
 	

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>New Booking for Hotel Room</title>
+<title>Hotel Management System - Booking</title>
 <style>
 body {
 	margin: 0;
@@ -20,12 +20,15 @@ body {
 	left: 42%;
 	width: 100%;
 	display: inline-block;
-	margin-top: 10%;
+	margin-top: 5%;
 	text-align: left;	
 }
 
 .hide {
 	display: none;
+}
+.error{
+	color:red
 }
 </style>
 <script
@@ -82,6 +85,35 @@ body {
 						$("#cancel").click(function() {
 
 						});
+						
+						$("form").submit(function(e){
+							var flg;
+							$('#error').empty();
+							if(this.city.value <= 0){
+								$('#error').append("Please select City"); flg=true;
+							}else if(this.hotel.value <= 0){
+								$('#error').append("Please select Hotel");flg=true;
+							}else if(this.roomCount.value <= 0 ){
+								$('#error').append("Please enter room count 1 or more");flg=true;
+							}else if(this.hcheckindate.value == ''){
+								$('#error').append("Please select Check-In-Date");flg=true;
+							}else if(this.hcheckoutdate.value == ''){
+								$('#error').append("Please select Check-Out-Date");flg=true;
+							}else{
+								$('#error').addClass("hide");flg=false;
+							}
+							
+							if(flg){
+								$('#error').removeClass("hide");
+								e.preventDefault();
+								return false;
+							}else if(this.city.value > 0 && this.hotel.value > 0 & this.roomCount.value > 0 && this.hcheckindate.value != '' && this.hcheckoutdate.value != '')
+					        {
+								$('#error').empty();
+								$('#error').addClass("hide");
+								return true;
+					        }
+					    });
 
 					});
 </script>
@@ -89,6 +121,7 @@ body {
 <body class="body">
 	<h2>New Booking for Hotel Room</h2>
 	<form:form name="booking" id="booking" method="POST" action="bookRoom" commandName="booking">
+	<div id="error" class="error hide"></div>
 	<div class="container">
 		<table>
 			<tr>

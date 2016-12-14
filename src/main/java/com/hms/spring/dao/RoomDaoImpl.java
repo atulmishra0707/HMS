@@ -1,6 +1,5 @@
 package com.hms.spring.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -48,12 +47,7 @@ public class RoomDaoImpl implements RoomDao {
 	public int addBooking(Booking b) {
 		try{
 		Session session = this.sessionFactory.getCurrentSession();
-		/*SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
-		Date chkIn = ft.parse(b.getCheckInDate());
-		Date chkOut = ft.parse(b.getCheckOutDate());
-		b.setCheckInDate(chkIn.toString());
-		b.setCheckOutDate(chkOut.toString());*/
-		b.setModifyBy("HMSSystem");
+		b.setModifyBy("HMS_System");
 		b.setModifyOn(new Date());
 		
 		session.persist(b);
@@ -68,5 +62,21 @@ public class RoomDaoImpl implements RoomDao {
 	public void updateBooking(Booking b) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public City getCity(Booking b) {
+		Session session = this.sessionFactory.getCurrentSession();		
+		City city = (City) session.load(City.class, new Integer(b.getId()));
+		logger.info("City Record loaded successfully, "+city);
+		return city;
+	}
+
+	@Override
+	public Hotel getHotel(Booking b) {
+		Session session = this.sessionFactory.getCurrentSession();		
+		Hotel hotel = (Hotel) session.load(Hotel.class, new Integer(b.getId()));
+		logger.info("Hotel Record loaded successfully, "+hotel);
+		return hotel;
 	}
 }

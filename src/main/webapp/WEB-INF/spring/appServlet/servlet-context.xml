@@ -52,7 +52,6 @@
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="annotatedClasses">
 			<beans:list>
-				<beans:value>com.hms.spring.model.Person</beans:value>
 				<beans:value>com.hms.spring.model.City</beans:value>
 				<beans:value>com.hms.spring.model.Hotel</beans:value>
 				<beans:value>com.hms.spring.model.Room</beans:value>
@@ -67,13 +66,6 @@
 				<beans:prop key="hbm2ddl.auto">update</beans:prop>
 			</beans:props>
 		</beans:property>
-	</beans:bean>
-	
-	<beans:bean id="personDAO" class="com.hms.spring.dao.PersonDAOImpl">
-		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
-	</beans:bean>
-	<beans:bean id="personService" class="com.hms.spring.service.PersonServiceImpl">
-		<beans:property name="personDAO" ref="personDAO"></beans:property>
 	</beans:bean>
 	
 	<beans:bean id="roomDao" class="com.hms.spring.dao.RoomDaoImpl">

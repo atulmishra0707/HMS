@@ -14,5 +14,7 @@ public interface RoomService {
 	public List<Hotel> listHotel();
 	public int addBooking(Booking b);
 	public void updateBooking(Booking b);
+	public City getCity(Booking b);
+	public Hotel getHotel(Booking b);
 
 }

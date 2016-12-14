@@ -16,4 +16,8 @@ public interface RoomDao {
 
 	public void updateBooking(Booking b);
 
+	public City getCity(Booking b);
+
+	public Hotel getHotel(Booking b);
+
 }
