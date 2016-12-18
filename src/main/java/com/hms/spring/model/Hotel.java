@@ -26,6 +26,10 @@ public class Hotel {
 	@Column(name="mdfyOn")
 	private Date modifyOn;
 	private int cityId;
+	private transient String cityName;
+
+	@Column(name="hotelTariff")
+	private String hotelTariff;
 	public int getHotelId() {
 		return hotelId;
 	}
@@ -79,6 +83,25 @@ public class Hotel {
 	}
 	public void setCityId(int cityId) {
 		this.cityId = cityId;
+	}
+	public String getHotelTariff() {
+		return hotelTariff;
+	}
+	public void setHotelTariff(String hotelTariff) {
+		this.hotelTariff = hotelTariff;
+	}
+	@Override
+	public String toString() {
+		return "Hotel [hotelId=" + hotelId + ", hotelName=" + hotelName + ", hotelAddress=" + hotelAddress
+				+ ", hotelPhone=" + hotelPhone + ", hotelEmail=" + hotelEmail + ", hotelWebLink=" + hotelWebLink
+				+ ", modifyBy=" + modifyBy + ", modifyOn=" + modifyOn + ", cityId=" + cityId + ", hotelTariff="
+				+ hotelTariff + "]";
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
 	}
 
 }

@@ -10,7 +10,29 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
-
+		$("#go").click(function() {
+			var cityId= $("#city").val();
+			if(cityId && cityId!="0"){
+				window.location='/HMS/lowestPriceHotel/'+cityId;
+				return true;
+			}else{
+				e.preventDefault();
+				return false;
+			}
+			
+			/* alert(cityId);
+			$.ajax({
+		        url: "lowestPriceHotel/"+cityId,
+		        contentType: "application/json; charset=utf-8",
+		        dataType: "json",
+		        type: "get",
+		        //data: '{cityId:cityId}',
+		        success: function (response) {
+		        	alert(response);
+		        	document.getElementById("hoteldata").innerHTML = response.document.getElementById("hoteldata").innerHTML;
+		    }
+		}); */
+		});
 	});
 </script>
 <style type="text/css">
@@ -18,11 +40,12 @@
 	border-collapse: collapse;
 	border-spacing: 0;
 	border-color: #ccc;
+	table-layout:fixed;
 }
 
 .tg td {
 	font-family: Arial, sans-serif;
-	font-size: 14px;
+	font-size: 10px;
 	padding: 10px 5px;
 	border-style: solid;
 	border-width: 1px;
@@ -49,6 +72,7 @@
 
 .tg .tg-4eph {
 	background-color: #f9f9f9
+	overflow: hidden;
 }
 
 body {
@@ -62,20 +86,20 @@ body {
 	left: 42%;
 	width: 100%;
 	display: inline-block;
-	margin-top: 10%;
+	margin-top: 5%;
 	text-align: left;
 }
 .table {
 	position: relative;
-	left: 30%;
+	left: 10%;
 	width: 100%;
 	display: inline-block;
 	text-align: left;
 }
 .div{
-    margin: 10	;
     padding: 0.4em;
     text-align: center;
+    overflow: auto;
   }
 </style>
 </head>
@@ -83,43 +107,57 @@ body {
 	<h2>List of Hotel with Lowest Price</h2>
 	<div>
 		<div class="container div">
+		<form name="lowestPriceHotel" id="lowestPriceHotel" method="GET" action="lowestPriceHotel">
 			<table>
 				<tr>
 					<td>City</td>
 					<c:if test="${!empty listCity}">
-						<td><select name="city">
+						<td><select id="city" name="city">
 								<option value="0">---</option>
 								<c:forEach items="${listCity}" var="city">
-									<option value="${city.id}">${city.name}</option>
+								    <c:if test ="${SelectedCityId.toString() == city.cityId.toString()}">
+									<option value="${city.cityId}" selected >${city.name}</option>
+									</c:if>
+									<c:if test ="${SelectedCityId.toString() != city.cityId.toString()}">
+									<option value="${city.cityId}">${city.name}</option>
+									</c:if>
 								</c:forEach>
 						</select></td>
 					</c:if>
 					<c:if test="${empty listCity}">
-						<td><select name="city">
+						<td><select id="city" name="city">
 								<option value="0">---</option>
 						</select></td>
 					</c:if>
+					<td><input type="button" value="Go" id="go"/></td>
 				</tr>
 			</table>
+			</form>
 		</div>
-		<div class=" table">
+		<div class=" table div">
 			<table class="tg">
 				<tr>
-					<th width="80">Hotel</th>
-					<th width="120">Address</th>
-					<th width="120">Price(per Day)</th>
+				
 					<th width="60">Action</th>
+					<th width="80">City</th>
+					<th width="80">Hotel</th>
+					<th width="100">Price(per Day)</th>
+					<th width="140">Address</th>
+					<th width="90">Phone</th>
+					<th width="200">Email</th>
 				</tr>
 			</table>
-			<c:if test="${!empty listHotels}">
-				<table class="tg">
-					<c:forEach items="${listHotels}" var="hotel">
+			<c:if test="${!empty listHotel}">
+				<table id="hoteldata" class="tg">
+					<c:forEach items="${listHotel}" var="hotel">
 						<tr>
-							<td>${hotel.id}</td>
-							<td>${hotel.name}</td>
-							<td>${hotel.name}</td>
-							<td>${hotel.country}</td>
-							<td><a href="<c:url value='/book/${hotel.id}' />">Book</a></td>
+							<td width="60"><a href="#">Book</a></td><%--  <c:url value='/book/${hotel.hotelId}'/> --%>
+							<td width="80"><input type="hidden" value="${hotel.cityId}"/>${hotel.cityName}</td>
+							<td width="80">${hotel.hotelName}</td>
+							<td width="100">${hotel.hotelTariff}</td>
+							<td width="140">${hotel.hotelAddress}</td>
+							<td width="90">${hotel.hotelPhone}</td>
+							<td width="200">${hotel.hotelEmail}</td>
 						</tr>
 					</c:forEach>
 				</table>

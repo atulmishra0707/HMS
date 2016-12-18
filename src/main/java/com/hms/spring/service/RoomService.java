@@ -16,5 +16,6 @@ public interface RoomService {
 	public void updateBooking(Booking b);
 	public City getCity(Booking b);
 	public Hotel getHotel(Booking b);
+	public List<Hotel> LowestPriceHotelList(String cityId);
 
 }

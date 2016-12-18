@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -45,7 +46,14 @@ public class RoomController {
 		model.addAttribute("listCity", this.listCity());
 		return "lowestPriceHotel";
 	}
-	
+	@RequestMapping(value = "/lowestPriceHotel/{cityId}", method = RequestMethod.GET)
+	public String showLowestPriceHotelList(@PathVariable String cityId, Model model) {
+		logger.info("showLowestPriceHotel call");
+		model.addAttribute("listCity", this.listCity());
+		model.addAttribute("listHotel", roomService.LowestPriceHotelList(cityId));
+		model.addAttribute("SelectedCityId",cityId);
+		return "lowestPriceHotel";
+	}
 	@RequestMapping(value = "/bookRoom", method = RequestMethod.POST)
 	public String newRoomBooking(@ModelAttribute("booking") Booking b, Model model) {
 		logger.info("newRoomBooking call");

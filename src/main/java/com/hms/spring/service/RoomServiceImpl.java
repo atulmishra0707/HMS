@@ -67,4 +67,9 @@ public class RoomServiceImpl implements RoomService {
 	public Hotel getHotel(Booking b) {
 		return this.roomDao.getHotel(b);
 	}
+
+	@Override
+	public List<Hotel> LowestPriceHotelList(String cityId) {
+		return this.roomDao.getLowestPriceHotelList(cityId);
+	}
 }

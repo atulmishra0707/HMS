@@ -20,4 +20,6 @@ public interface RoomDao {
 
 	public Hotel getHotel(Booking b);
 
+	public List<Hotel> getLowestPriceHotelList(String cityId);
+
 }

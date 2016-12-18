@@ -16,7 +16,7 @@ public class City {
 	@Id
 	@Column(name="cityId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private int cityId;
 	@Column(name="cityName")
 	private String name;
 	@Column(name="mdfyBy")
@@ -24,11 +24,11 @@ public class City {
 	@Column(name="mdfyOn")
 	private Date modifyOn;
 	
-	public int getId() {
-		return id;
+	public int getCityId() {
+		return cityId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
 	}
 	public String getName() {
 		return name;

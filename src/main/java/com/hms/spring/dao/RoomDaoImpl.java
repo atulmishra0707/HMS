@@ -1,10 +1,14 @@
 package com.hms.spring.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,5 +82,25 @@ public class RoomDaoImpl implements RoomDao {
 		Hotel hotel = (Hotel) session.load(Hotel.class, new Integer(b.getId()));
 		logger.info("Hotel Record loaded successfully, "+hotel);
 		return hotel;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Hotel> getLowestPriceHotelList(String cityId) {
+		Session session = this.sessionFactory.openSession();
+		int tmpCityId = Integer.valueOf(cityId);
+		City city=(City) session.get(City.class,tmpCityId);
+		Criteria criteria = session.createCriteria(Hotel.class,"hotel")
+				.addOrder(Order.asc("hotelTariff"));
+		List<Hotel> hotelList = criteria.list();
+		List<Hotel> hotelList1 = new ArrayList<Hotel>();
+		for(Hotel hotel : hotelList){
+			logger.info("Hotel List::"+hotel.toString());
+			if(hotel.getCityId()== tmpCityId && hotelList1.size() <= 5){
+				hotel.setCityName(city.getName());
+				hotelList1.add(hotel);
+			}
+		}
+		return hotelList1;
 	}
 }

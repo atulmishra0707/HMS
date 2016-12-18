@@ -130,7 +130,7 @@ body {
 					<td><form:select path="cityId" id="city" name="city">
 							<option value="0">---</option>
 							<c:forEach items="${listCity}" var="city">
-								<option value="${city.id}">${city.name}</option>
+								<option value="${city.cityId}">${city.name}</option>
 							</c:forEach>
 					</form:select></td>
 				</c:if>
